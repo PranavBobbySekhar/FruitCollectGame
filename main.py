@@ -7,6 +7,9 @@ pygame.init()
 width = 1158
 height = 768
 wn = pygame.display.set_mode((width, height))
+fruits = pygame.image.load('fruits.png')
+pygame.display.set_icon(fruits)
+pygame.display.set_caption('Fruit Collect')
 white = (255, 255, 255)
 
 run = True
