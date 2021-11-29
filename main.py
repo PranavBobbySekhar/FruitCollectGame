@@ -177,3 +177,4 @@ while run:
         pear_y = -1
         pear_x = random.randint(290, 870)
     pygame.display.update()
+    
