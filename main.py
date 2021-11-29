@@ -1,5 +1,5 @@
 import random
-
+import json
 import pygame
 
 pygame.init()
@@ -13,6 +13,7 @@ pygame.display.set_caption('Fruit Collect')
 white = (255, 255, 255)
 
 run = True
+newhighscore = False
 
 background = pygame.image.load('background.jpg')
 
@@ -62,7 +63,6 @@ last_score_font = pygame.font.Font('cool_font.ttf', 90)
 last_score_x = 175
 last_score_y = 460
 
-
 thing_to_drop = ["apple", "mango", "banana", "pear"]
 
 
@@ -83,9 +83,16 @@ def show_difficulty(x, y):
 
 def game_over(gx, gy, lsx, lsy):
     gameover = game_over_font.render(f"GAME OVER", True, (255, 255, 255))
-    last_score = last_score_font.render(f"YOUR SCORE WAS {score_value}", True, (255, 255, 255))
-    wn.blit(gameover, (gx, gy))
-    wn.blit(last_score, (lsx, lsy))
+    if newhighscore:
+        last_score = last_score_font.render(f"YOUR SCORE WAS {score_value}", True, (255, 255, 255))
+        high_score = last_score_font.render("NEW HIGHSCORE!!", True, (255, 255, 255))
+        wn.blit(gameover, (gx, gy))
+        wn.blit(last_score, (lsx, lsy))
+        wn.blit(high_score, (215, 550))
+    else:
+        last_score = last_score_font.render(f"YOUR SCORE WAS {score_value}", True, (255, 255, 255))
+        wn.blit(gameover, (gx, gy))
+        wn.blit(last_score, (lsx, lsy))
 
 
 isgameover = False
@@ -119,6 +126,14 @@ while run:
         pear_y = 2000
         nextthing = False
         game_over(game_over_x, game_over_y, last_score_x, last_score_y)
+        write_data = {"score": score_value}
+        with open('scores.json') as read_file:
+            data = json.load(read_file)
+            if write_data["score"] > data["score"]:
+                newhighscore = True
+        if newhighscore:
+            with open('scores.json', 'w') as write_file:
+                json.dump(write_data, write_file)
     show_score(textX, textY)
     show_missed(missX, missY)
     show_difficulty(difficulty_x, difficulty_y)
@@ -177,4 +192,3 @@ while run:
         pear_y = -1
         pear_x = random.randint(290, 870)
     pygame.display.update()
-    
