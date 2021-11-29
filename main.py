@@ -53,7 +53,12 @@ difficulty_y = 10
 
 game_over_font = pygame.font.Font('cool_font.ttf', 200)
 game_over_x = 75
-game_over_y = 290
+game_over_y = 250
+
+last_score_font = pygame.font.Font('cool_font.ttf', 90)
+last_score_x = 175
+last_score_y = 460
+
 
 thing_to_drop = ["apple", "mango", "banana", "pear"]
 
@@ -73,9 +78,11 @@ def show_difficulty(x, y):
     wn.blit(difficulty, (x, y))
 
 
-def game_over(x, y):
-    gameover = game_over_font.render("GAME OVER", True, (255, 255, 255))
-    wn.blit(gameover, (x, y))
+def game_over(gx, gy, lsx, lsy):
+    gameover = game_over_font.render(f"GAME OVER", True, (255, 255, 255))
+    last_score = last_score_font.render(f"YOUR SCORE WAS {score_value}", True, (255, 255, 255))
+    wn.blit(gameover, (gx, gy))
+    wn.blit(last_score, (lsx, lsy))
 
 
 isgameover = False
@@ -93,9 +100,22 @@ while run:
                 basket_speed = 6
             if event.key == pygame.K_LEFT and not isgameover:
                 basket_speed = -6
+            if event.key == pygame.K_q:
+                isgameover = True
         if event.type == pygame.KEYUP:
             if (event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT) and not isgameover:
                 basket_speed = 0
+    if isgameover:
+        missY = 2000
+        textY = 2000
+        difficulty_y = 2000
+        basket_y = 3000
+        apple_y = 2000
+        mango_y = 2000
+        banana_y = 2000
+        pear_y = 2000
+        nextthing = False
+        game_over(game_over_x, game_over_y, last_score_x, last_score_y)
     show_score(textX, textY)
     show_missed(missX, missY)
     show_difficulty(difficulty_x, difficulty_y)
@@ -130,16 +150,6 @@ while run:
         miss_value += 1
         if miss_value >= 10:
             isgameover = True
-            missY = 2000
-            textY = 2000
-            difficulty_y = 2000
-            basket_y = 2000
-            apple_y = 2000
-            mango_y = 2000
-            banana_y = 2000
-            pear_y = 2000
-            nextthing = False
-            game_over(game_over_x, game_over_y)
         else:
             apple_x = random.randint(290, 870)
             apple_y = -1
@@ -164,3 +174,4 @@ while run:
         pear_y = -1
         pear_x = random.randint(290, 870)
     pygame.display.update()
+    
