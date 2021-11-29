@@ -21,3 +21,10 @@ iii) Hard : Hardest Level, starts at 50 points and goes on until the player quit
 
 To quit the game manually, press "q".
 
+Preview of the game:
+
+![preview](https://imgur.com/zvVgVsh.png)
+
+Displays score:
+
+![score](https://imgur.com/rONzhY6.png)
