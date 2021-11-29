@@ -42,6 +42,7 @@ pear_x = random.randint(100, 1000)
 
 score_value = 0
 score_font = pygame.font.Font('cool_font.ttf', 50)
+incrementation = 0
 textX = 20
 textY = 10
 
@@ -107,9 +108,15 @@ while run:
             run = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT and not isgameover:
-                basket_speed = 6
+                if difficulty_value == "insane":
+                    basket_speed = 8
+                else:
+                    basket_speed = 6
             if event.key == pygame.K_LEFT and not isgameover:
-                basket_speed = -6
+                if difficulty_value == "insane":
+                    basket_speed = -8
+                else:
+                    basket_speed = -6
             if event.key == pygame.K_q:
                 isgameover = True
         if event.type == pygame.KEYUP:
@@ -158,12 +165,19 @@ while run:
     if score_value < 20:
         drop_speed = 2
         difficulty_value = "easy"
+        incrementation = 1
     elif 20 <= score_value < 50:
         drop_speed = 3
         difficulty_value = "medium"
-    elif score_value >= 50:
+        incrementation = 1
+    elif 50 <= score_value < 100:
         drop_speed = 4
         difficulty_value = "hard"
+        incrementation = 2
+    elif score_value >= 100:
+        drop_speed = 5
+        difficulty_value = "insane"
+        incrementation = 3
     if apple_y > 704 or mango_y > 704 or banana_y > 704 or pear_y > 704:
         miss_value += 1
         if miss_value >= 10:
@@ -181,7 +195,7 @@ while run:
     if apple_y >= basket_y and (basket_x - 32) < apple_x < (basket_x + 128) or mango_y >= basket_y and (
             basket_x - 32) < mango_x < (basket_x + 128) or banana_y >= basket_y and (basket_x - 32) < banana_x < (
             basket_x + 128) or pear_y >= basket_y and (basket_x - 32) < pear_x < (basket_x + 128):
-        score_value += 1
+        score_value += incrementation
         nextthing = True
         apple_y = -1
         apple_x = random.randint(290, 870)
