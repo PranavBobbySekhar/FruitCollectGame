@@ -7,7 +7,7 @@ pygame.init()
 width = 1158
 height = 768
 wn = pygame.display.set_mode((width, height))
-fruits = pygame.image.load('fruits.png')
+fruits = pygame.image.load('images/fruits.png')
 pygame.display.set_icon(fruits)
 pygame.display.set_caption('Fruit Collect')
 white = (255, 255, 255)
@@ -15,28 +15,28 @@ white = (255, 255, 255)
 run = True
 newhighscore = False
 
-background = pygame.image.load('background.jpg')
+background = pygame.image.load('images/background.jpg')
 
 drop_speed = 0
 
-basket = pygame.image.load('basket.png')
+basket = pygame.image.load('images/basket.png')
 basket_x = 515
 basket_y = 630
 basket_speed = 0
 
-apple = pygame.image.load('apple.png')
+apple = pygame.image.load('images/apple.png')
 apple_y = -1
 apple_x = random.randint(100, 1000)
 
-mango = pygame.image.load('mango.png')
+mango = pygame.image.load('images/mango.png')
 mango_y = -1
 mango_x = random.randint(100, 1000)
 
-banana = pygame.image.load('banana.png')
+banana = pygame.image.load('images/banana.png')
 banana_y = -1
 banana_x = random.randint(100, 1000)
 
-pear = pygame.image.load('pear.png')
+pear = pygame.image.load('images/pear.png')
 pear_y = -1
 pear_x = random.randint(100, 1000)
 
