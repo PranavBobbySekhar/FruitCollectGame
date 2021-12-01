@@ -110,22 +110,6 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT and not isgameover:
-                if difficulty_value == "insane":
-                    basket_speed = 8
-                else:
-                    basket_speed = 6
-            if event.key == pygame.K_LEFT and not isgameover:
-                if difficulty_value == "insane":
-                    basket_speed = -8
-                else:
-                    basket_speed = -6
-            if event.key == pygame.K_q:
-                isgameover = True
-        if event.type == pygame.KEYUP:
-            if (event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT) and not isgameover:
-                basket_speed = 0
     if isgameover:
         missY = 2000
         textY = 2000
