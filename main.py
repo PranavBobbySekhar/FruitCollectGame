@@ -101,6 +101,10 @@ isgameover = False
 nextthing = True
 
 while run:
+    cursor_pos = pygame.mouse.get_pos()
+    cursorXuf, cursorYuf = str(cursor_pos).split(',')
+    cursorX = cursorXuf[1:]
+    cursorY = cursorYuf[:-1]
     wn.fill(white)
     wn.blit(background, (0, 0))
     for event in pygame.event.get():
@@ -144,8 +148,8 @@ while run:
     show_score(textX, textY)
     show_missed(missX, missY)
     show_difficulty(difficulty_x, difficulty_y)
-    basket_x += basket_speed
-    wn.blit(basket, (basket_x, basket_y))
+    basket_x = cursorX
+    wn.blit(basket, (int(basket_x), basket_y))
     global thing
     if nextthing:
         thing = random.choice(thing_to_drop)
@@ -192,9 +196,9 @@ while run:
             pear_x = random.randint(290, 870)
             pear_y = -1
             nextthing = True
-    if apple_y >= basket_y and (basket_x - 32) < apple_x < (basket_x + 128) or mango_y >= basket_y and (
-            basket_x - 32) < mango_x < (basket_x + 128) or banana_y >= basket_y and (basket_x - 32) < banana_x < (
-            basket_x + 128) or pear_y >= basket_y and (basket_x - 32) < pear_x < (basket_x + 128):
+    if apple_y >= basket_y and (int(basket_x) - 32) < apple_x < (int(basket_x) + 128) or mango_y >= basket_y and (
+            int(basket_x) - 32) < mango_x < (int(basket_x) + 128) or banana_y >= basket_y and (int(basket_x) - 32) < banana_x < (
+            int(basket_x) + 128) or pear_y >= basket_y and (int(basket_x) - 32) < pear_x < (int(basket_x) + 128):
         score_value += incrementation
         nextthing = True
         apple_y = -1
