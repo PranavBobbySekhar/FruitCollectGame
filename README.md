@@ -7,7 +7,7 @@ Install pygame before running:
 Rules:
 Random fruits will drop from the sky from random positions and you have to catch them using the basket.
 
-Use the arrow keys to move the basket left and right.
+You can use the mouse to move the basket left and right.
 
 If you miss the fruit and it falls to the ground 10 times, you lose.
 
